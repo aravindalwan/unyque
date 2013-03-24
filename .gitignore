@@ -4,4 +4,4 @@
 setup.cfg
 build
 dist
-src/unyque.egg-info
+unyque.egg-info
