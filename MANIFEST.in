@@ -1,0 +1,6 @@
+include distribute_setup.py
+include README.rst
+include NEWS.txt
+include LICENSE
+
+recursive-include unyque/internals *.hpp *.cpp

@@ -1,0 +1,7 @@
+*~
+*.pyc
+*.so
+setup.cfg
+build
+dist
+src/unyque.egg-info
