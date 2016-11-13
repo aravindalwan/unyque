@@ -21,9 +21,9 @@ For a copy of the GNU General Public License, please see
 
 import decimal as dec
 import itertools as it
-import cPickle
+import pickle
 
-import logmanager
+from . import logmanager
 
 class FunctionEvaluator(object):
     '''Class to aggregate function evaluations i.e. the system response for
@@ -60,7 +60,7 @@ class FunctionEvaluator(object):
         if self.use_cache and self._cache_file is not None:
             try:
                 with open(self._cache_file, 'rb') as pf:
-                    cache = cPickle.load(pf)
+                    cache = pickle.load(pf)
                     self._cache.update(cache)
                     self._func_evaluations = len(self._cache)
             except IOError as ioe:
@@ -114,7 +114,7 @@ class FunctionEvaluator(object):
                 # Save to temporary cache to avoid corrupting main cache file
                 if self._cache_file and counter % cache_point == 0:
                     with open(self._cache_file + '.tmp', 'wb') as pf:
-                        cPickle.dump(self._cache, pf)
+                        pickle.dump(self._cache, pf)
 
                 # Log progress information
                 if counter % log_point == 0:
@@ -129,7 +129,7 @@ class FunctionEvaluator(object):
             # This avoids corrupting cache file if there are no updates
             if self._cache_file is not None and counter > 0:
                 with open(self._cache_file, 'wb') as pf:
-                    cPickle.dump(self._cache, pf)
+                    pickle.dump(self._cache, pf)
 
             # Return results from cache
             results = [self._cache[pset] for pset in parameter_sets]
@@ -175,5 +175,3 @@ class FunctionEvaluator(object):
             context.clear_flags()
 
         return [tuple(pset) for pset in quantized_sets]
-
-

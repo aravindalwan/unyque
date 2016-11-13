@@ -19,11 +19,11 @@ For a copy of the GNU General Public License, please see
 <http://www.gnu.org/licenses/>.
 '''
 
-import cPickle
+import pickle
 
-import logmanager
-from rdomain import RandomDomain
-import mpihelper
+from . import logmanager
+from .rdomain import RandomDomain
+from . import mpihelper
 
 class StochasticCollocation(object):
     '''Basic solver that uses stochastic collocation to propagate uncertainties

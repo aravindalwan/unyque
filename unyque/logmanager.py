@@ -20,10 +20,10 @@ For a copy of the GNU General Public License, please see
 '''
 
 import logging
-import cPickle
+import pickle
 from collections import defaultdict
 
-import mpihelper
+from . import mpihelper
 
 # Define levels for results logger
 ITERATION = logging.DEBUG
@@ -111,7 +111,7 @@ class ResultsLogger(logging.Logger):
                 with open(filename, 'rb') as f:
                     while True:
                         try:
-                            results.append(cPickle.load(f))
+                            results.append(pickle.load(f))
                         except EOFError:
                             break
             except IOError as ioe:
@@ -205,7 +205,7 @@ class ResultsHandler(logging.Handler):
 
         if mpihelper.rank == mpihelper.MASTER:
             with open(self.filename, 'ab') as f:
-                cPickle.dump(record.__dict__, f)
+                pickle.dump(record.__dict__, f)
         else:
             mpihelper.comm.send(record, dest = mpihelper.MASTER,
                                 tag = RESULT_TAG)

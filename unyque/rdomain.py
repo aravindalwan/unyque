@@ -21,9 +21,9 @@ For a copy of the GNU General Public License, please see
 import itertools as it
 import operator as op
 
-from rdimension import RandomDimension
+from .rdimension import RandomDimension
 import unyque._internals as internals
-import logmanager
+from . import logmanager
 
 class RandomDomain(object):
     '''Basic random domain object that consists of a set of random dimensions.
